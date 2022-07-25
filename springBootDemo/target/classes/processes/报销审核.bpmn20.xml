@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+    <process id="报销审核" name="报销审核" isExecutable="true">
+        <startEvent id="startEvent1" name="开始"/>
+
+        <userTask id="userTask1" name="发起报销"/>
+        <userTask id="userTask2" name="报销审核"/>
+
+        <endEvent id="endEvent1" name="结束"/>
+
+        <sequenceFlow id="sequenceFlow1" sourceRef="startEvent1" targetRef="userTask1"/>
+        <sequenceFlow id="sequenceFlow2" sourceRef="userTask1" targetRef="userTask2"/>
+        <sequenceFlow id="sequenceFlow3" sourceRef="userTask2" targetRef="endEvent1"/>
+    </process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_报销审核">
+        <bpmndi:BPMNPlane bpmnElement="报销审核" id="BPMNPlane_报销审核">
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>
