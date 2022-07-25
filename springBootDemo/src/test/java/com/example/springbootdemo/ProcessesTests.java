@@ -1,8 +1,10 @@
 package com.example.springbootdemo;
 
 import org.flowable.common.engine.api.FlowableException;
+import org.flowable.engine.HistoryService;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.Test;
@@ -10,13 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HolidayRequestTests {
+class ProcessesTests {
 
     @Autowired
     private RepositoryService repositoryService;
 
     @Autowired
     private RuntimeService runtimeService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private HistoryService historyService;
 
     @Test
     void contextLoads() {
@@ -136,5 +144,54 @@ class HolidayRequestTests {
     }
 
     // -------------- 任务处理相关 --------------
-    
+
+    /**
+     * 获取任务信息
+     */
+    @Test
+    void getTasks() {
+        taskService.createTaskQuery()
+//                .taskAssignee("bajie")
+                .list().forEach(i -> {
+            System.out.println("TaskId: " + i.getId());
+            System.out.println("TaskName: " + i.getName());
+            System.out.println("TaskAssignee: " + i.getAssignee());
+            System.out.println("isSuspended: " + i.isSuspended());
+            System.out.println("------------------------");
+        });
+    }
+
+    /**
+     * 完成任务
+     */
+    @Test
+    void completeTask() {
+        taskService.complete("taskId");
+    }
+
+    /**
+     * 认领任务
+     */
+    @Test
+    void claimTask() {
+        taskService.claim("taskId", "userId");
+
+        // 归还任务
+        taskService.claim("taskId", "null");
+    }
+
+    // -------------- 历史任务相关 --------------
+
+    @Test
+    void getHistoryTaskInstance() {
+        historyService.createHistoricTaskInstanceQuery()
+                .orderByHistoricTaskInstanceEndTime().asc()
+//                .taskAssignee("bajie")
+                .list()
+                .forEach(i -> {
+                    System.out.println("Id: " + i.getId());
+                    System.out.println("Name: " + i.getName());
+                    System.out.println("Assignee: " + i.getAssignee());
+                });
+    }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
+             expressionLanguage="http://www.w3.org/1999/XPath" id="m1595735401883" name=""
+             targetNamespace="http://www.activiti.org/testm1595735401883"
+             typeLanguage="http://www.w3.org/2001/XMLSchema">
+
+    <process id="myProcess_Task" isClosed="false" isExecutable="true" name="报销流程" processType="None">
+        <startEvent id="_2" name="StartEvent"/>
+        <endEvent id="_3" name="EndEvent"/>
+        <userTask activiti:assignee="bajie" activiti:exclusive="true" id="_4" name="发起报销"/>
+        <userTask activiti:assignee="wukong" activiti:exclusive="true" id="_5" name="审核报销"/>
+        <sequenceFlow id="_6" sourceRef="_2" targetRef="_4"/>
+        <sequenceFlow id="_7" sourceRef="_4" targetRef="_5"/>
+        <sequenceFlow id="_8" sourceRef="_5" targetRef="_3"/>
+    </process>
+</definitions>
