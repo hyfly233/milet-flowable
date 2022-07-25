@@ -39,11 +39,11 @@ class ProcessesTests {
     @Test
     void deployment() {
         String filePath = "processes";
-        String fileName = "holiday-request.bpmn20.xml";
+//        String fileName = "holiday-request.bpmn20.xml";
+        String fileName = "报销审核.bpmn20.xml";
 
         Deployment deploy = repositoryService.createDeployment()
                 .addClasspathResource(filePath + "/" + fileName)
-                .name("休假请求测试")
                 .deploy();
 
         // f3ff45c2-0bc1-11ed-818f-d03c1f5533c6
@@ -87,9 +87,9 @@ class ProcessesTests {
     @Test
     void initProcessInstance() {
         // 对应 holiday-request.bpmn20.xml 中的 process 标签的 id 属性
-        String processDefinitionKey = "holidayRequest";
+        String processDefinitionKey = "reimbursementAudit";
         // 每个流程实例的 id 唯一
-        String businessKey = "holiday-request-1";
+        String businessKey = "reimbursementAudit-1";
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey);
 
@@ -117,7 +117,7 @@ class ProcessesTests {
     @Test
     void suspendProcessInstance() {
         try {
-            runtimeService.suspendProcessInstanceById("ad3751d4-0bc5-11ed-bdd7-d03c1f5533c6");
+            runtimeService.suspendProcessInstanceById("d9f617a6-0bf5-11ed-aebf-d23c1f5533c2");
         } catch (FlowableException e) {
             e.printStackTrace();
         }
@@ -129,7 +129,7 @@ class ProcessesTests {
     @Test
     void activateProcessInstance() {
         try {
-            runtimeService.activateProcessInstanceById("ad3751d4-0bc5-11ed-bdd7-d03c1f5533c6");
+            runtimeService.activateProcessInstanceById("d9f617a6-0bf5-11ed-aebf-d23c1f5533c2");
         } catch (FlowableException e) {
             e.printStackTrace();
         }
@@ -151,7 +151,7 @@ class ProcessesTests {
     @Test
     void getTasks() {
         taskService.createTaskQuery()
-//                .taskAssignee("bajie")
+//                .taskAssignee("wukong")
                 .list().forEach(i -> {
             System.out.println("TaskId: " + i.getId());
             System.out.println("TaskName: " + i.getName());
@@ -166,7 +166,7 @@ class ProcessesTests {
      */
     @Test
     void completeTask() {
-        taskService.complete("taskId");
+        taskService.complete("0daa903b-0bf8-11ed-a2bc-d23c1f5533c2");
     }
 
     /**

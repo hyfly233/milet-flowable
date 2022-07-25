@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
              typeLanguage="http://www.w3.org/2001/XMLSchema"
              expressionLanguage="http://www.w3.org/1999/XPath"
              targetNamespace="http://www.flowable.org/processdef">
 
-    <process id="uel_start_and_assign_a_value" isExecutable="true" name="启动流程给任务赋值">
+    <process id="myProcess_UEL_V111" isExecutable="true" name="启动流程给任务赋值">
         <startEvent id="_2" name="StartEvent"/>
-        <endEvent id="_3" name="EndEvent"/>
-        <userTask flowable:assignee="${ZhiXingRen}" flowable:exclusive="true" id="_4" name="uel任务节点"/>
         <sequenceFlow id="_5" sourceRef="_2" targetRef="_4"/>
-        <sequenceFlow id="_6" sourceRef="_4" targetRef="_3"/>
-    </process>
 
+        <userTask flowable:assignee="${ZhiXingRen}" flowable:exclusive="true" id="_4" name="uel任务节点"/>
+        <sequenceFlow id="_6" sourceRef="_4" targetRef="_3"/>
+
+        <endEvent id="_3" name="EndEvent"/>
+    </process>
 </definitions>

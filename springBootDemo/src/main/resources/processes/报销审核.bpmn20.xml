@@ -1,16 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn"
-             expressionLanguage="http://www.w3.org/1999/XPath" id="m1595735401883" name=""
-             targetNamespace="http://www.activiti.org/testm1595735401883"
-             typeLanguage="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
 
-    <process id="myProcess_Task" isClosed="false" isExecutable="true" name="报销流程" processType="None">
-        <startEvent id="_2" name="StartEvent"/>
-        <endEvent id="_3" name="EndEvent"/>
-        <userTask activiti:assignee="bajie" activiti:exclusive="true" id="_4" name="发起报销"/>
-        <userTask activiti:assignee="wukong" activiti:exclusive="true" id="_5" name="审核报销"/>
-        <sequenceFlow id="_6" sourceRef="_2" targetRef="_4"/>
-        <sequenceFlow id="_7" sourceRef="_4" targetRef="_5"/>
-        <sequenceFlow id="_8" sourceRef="_5" targetRef="_3"/>
+    <process id="reimbursementAudit" name="报销审核" isExecutable="true">
+        <startEvent id="startEvent1" name="开始"/>
+
+        <sequenceFlow id="sequenceFlow1" sourceRef="startEvent1" targetRef="userTask1"/>
+
+        <userTask id="userTask1" name="发起报销" flowable:assignee="bajie"/>
+
+        <sequenceFlow id="sequenceFlow2" sourceRef="userTask1" targetRef="userTask2"/>
+
+        <userTask id="userTask2" name="报销审核" flowable:assignee="wukong"/>
+
+        <sequenceFlow id="sequenceFlow3" sourceRef="userTask2" targetRef="endEvent1"/>
+
+        <endEvent id="endEvent1" name="结束"/>
     </process>
 </definitions>

@@ -4,6 +4,7 @@ import org.flowable.engine.HistoryService;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
+import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +32,30 @@ public class UelTests {
     void contextLoads() {
     }
 
+    @Test
+    void deployment() {
+        String filePath = "processes";
+        String fileName = "UEL_启动流程给任务赋值.bpmn20.xml";
+
+        Deployment deploy = repositoryService.createDeployment()
+                .addClasspathResource(filePath + "/" + fileName)
+                .deploy();
+
+        // f3ff45c2-0bc1-11ed-818f-d03c1f5533c6
+        System.out.println(deploy.getId());
+    }
+
     /**
      * 通过参数创建流程定义
      */
     @Test
     void initProcessInstanceWithArgs() {
         // 参数是一个 map 结构
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("process", "test", new HashMap<>(2) {{
-            put("name", "张三");
-            put("age", "18");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myProcess_UEL_V111", "myProcess_UEL_V1_test", new HashMap<>(1) {{
+            put("ZhiXingRen", "张三");
         }});
 
+        // e5888398-0bf7-11ed-984a-d23c1f5533c2
         System.out.println(processInstance.getId());
     }
 
