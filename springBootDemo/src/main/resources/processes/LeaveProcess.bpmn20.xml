@@ -55,7 +55,7 @@
             <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!pass}]]></conditionExpression>
         </sequenceFlow>
     </process>
-    
+
     <bpmndi:BPMNDiagram id="BPMNDiagram_Leave">
         <bpmndi:BPMNPlane bpmnElement="Leave" id="BPMNPlane_Leave">
             <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
