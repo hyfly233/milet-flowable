@@ -1,5 +1,7 @@
 package com.example.springbootdemo.utils;
 
+import com.example.springbootdemo.pojo.dto.SysRole;
+import com.example.springbootdemo.pojo.dto.SysUser;
 import org.flowable.idm.api.Group;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntity;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntityImpl;
@@ -22,7 +24,7 @@ public class FlowableConvertUtils {
         userEntity.setId(user.getId());
         userEntity.setDisplayName(user.getUsername());
         userEntity.setEmail(user.getEmail());
-        userEntity.setDeleted(user.getDelFlag() == DeleteFlag.DELETED.getCode());
+        userEntity.setDeleted(user.getDelFlag());
 
         return userEntity;
     }
