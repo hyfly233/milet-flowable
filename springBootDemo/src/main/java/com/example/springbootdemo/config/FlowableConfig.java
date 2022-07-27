@@ -1,5 +1,6 @@
 package com.example.springbootdemo.config;
 
+import org.flowable.common.engine.impl.persistence.StrongUuidGenerator;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.springframework.context.annotation.Configuration;
@@ -11,5 +12,8 @@ public class FlowableConfig implements EngineConfigurationConfigurer<SpringProce
         engineConfiguration.setActivityFontName("宋体");
         engineConfiguration.setLabelFontName("宋体");
         engineConfiguration.setAnnotationFontName("宋体");
+
+        StrongUuidGenerator uuidGenerator = new StrongUuidGenerator();
+        engineConfiguration.setIdGenerator(uuidGenerator);
     }
 }

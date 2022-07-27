@@ -1,10 +1,9 @@
 package com.example.springbootdemo.service.impl;
 
 import com.example.springbootdemo.service.LeaveProcessService;
-import org.flowable.engine.IdentityService;
 import org.flowable.engine.TaskService;
-import org.flowable.idm.api.User;
-import org.flowable.task.api.Task;
+import org.flowable.idm.api.IdmIdentityService;
+import org.flowable.idm.api.UserQuery;
 import org.flowable.task.api.TaskInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +16,16 @@ public class LeaveProcessServiceImpl implements LeaveProcessService {
     private TaskService taskService;
 
     @Autowired
-    private IdentityService identityService;
+    private IdmIdentityService idmIdentityService;
 
     @Override
     public List<TaskInfo> taskList() {
 
-        List<Task> list = taskService.createTaskQuery()
-                .list();
+        UserQuery userQuery = idmIdentityService.createUserQuery();
 
-        List<User> users = identityService.createUserQuery().userId("123").list();
+        userQuery = userQuery.userId("123");
+
+        userQuery.list();
 
         return null;
     }
