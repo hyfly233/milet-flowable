@@ -69,6 +69,7 @@ public class SysRole {
     @TableField(value = "update_time")
     private Date updateTime;
 
+    @TableField(exist = false)
     List<SysUser> users;
 
     public static final String COL_ID = "id";

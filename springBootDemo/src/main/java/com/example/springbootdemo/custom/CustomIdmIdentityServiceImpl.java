@@ -4,12 +4,12 @@ import com.example.springbootdemo.service.CustomIdentityService;
 import org.flowable.idm.api.*;
 import org.flowable.idm.engine.IdmEngineConfiguration;
 import org.flowable.idm.engine.impl.IdmIdentityServiceImpl;
-import org.flowable.idm.engine.impl.NativeTokenQueryImpl;
-import org.flowable.idm.engine.impl.UserQueryImpl;
-import org.flowable.idm.engine.impl.cmd.*;
 
 import java.util.List;
 
+/**
+ * @author hyfly
+ */
 public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     private CustomIdentityService customIdentityService;
@@ -20,16 +20,35 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
     }
 
     @Override
-    public String getUserInfo(String userId, String key) {
+    public UserQuery createUserQuery() {
+        return new CustomUserQueryImpl(customIdentityService);
+    }
 
-        // todo
-        return null;
+    @Override
+    public GroupQuery createGroupQuery() {
+        return new CustomGroupQueryImpl(customIdentityService);
+    }
+
+    // ----------- 不在此处实现 -----------
+
+    @Override
+    public String getUserInfo(String userId, String key) {
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<String> getUserInfoKeys(String userId) {
-        // todo
-        return null;
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public NativeUserQuery createNativeUserQuery() {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public NativeGroupQuery createNativeGroupQuery() {
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
@@ -63,31 +82,6 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
     }
 
     @Override
-    public UserQuery createUserQuery() {
-        // TODO: 2022/7/27 暂时不实现
-        UserQueryImpl query = new UserQueryImpl();
-
-        query.setParameter("userId");
-
-        return query;
-    }
-
-    @Override
-    public NativeUserQuery createNativeUserQuery() {
-        throw new RuntimeException("Not implemented");
-    }
-
-    @Override
-    public GroupQuery createGroupQuery() {
-        return super.createGroupQuery();
-    }
-
-    @Override
-    public NativeGroupQuery createNativeGroupQuery() {
-        throw new RuntimeException("Not implemented");
-    }
-
-    @Override
     public void createMembership(String userId, String groupId) {
         throw new RuntimeException("Not implemented");
     }
@@ -103,12 +97,22 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
     }
 
     @Override
-    public boolean checkPassword(String userId, String password) {
+    public void deleteUser(String userId) {
         throw new RuntimeException("Not implemented");
     }
 
     @Override
-    public void deleteUser(String userId) {
+    public void deleteUserInfo(String userId, String key) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void deleteToken(String tokenId) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean checkPassword(String userId, String password) {
         throw new RuntimeException("Not implemented");
     }
 
@@ -128,35 +132,24 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
     }
 
     @Override
-    public void deleteUserInfo(String userId, String key) {
+    public Token newToken(String tokenId) {
         throw new RuntimeException("Not implemented");
     }
 
     @Override
-    public Token newToken(String tokenId) {
-        return commandExecutor.execute(new CreateTokenCmd(tokenId));
-    }
-
-    @Override
     public void saveToken(Token token) {
-        commandExecutor.execute(new SaveTokenCmd(token, configuration));
-    }
-
-    @Override
-    public void deleteToken(String tokenId) {
-        commandExecutor.execute(new DeleteTokenCmd(tokenId));
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public TokenQuery createTokenQuery() {
-        return commandExecutor.execute(new CreateTokenQueryCmd());
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public NativeTokenQuery createNativeTokenQuery() {
-        return new NativeTokenQueryImpl(commandExecutor);
+        throw new RuntimeException("Not implemented");
     }
-
 
     @Override
     public Privilege createPrivilege(String name) {
@@ -185,7 +178,7 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     @Override
     public List<PrivilegeMapping> getPrivilegeMappingsByPrivilegeId(String privilegeId) {
-        return commandExecutor.execute(new GetPrivilegeMappingsByPrivilegeIdCmd(privilegeId));
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
@@ -195,16 +188,16 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     @Override
     public PrivilegeQuery createPrivilegeQuery() {
-        return commandExecutor.execute(new CreatePrivilegeQueryCmd());
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Group> getGroupsWithPrivilege(String name) {
-        return commandExecutor.execute(new GetGroupsWithPrivilegeCmd(name));
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<User> getUsersWithPrivilege(String name) {
-        return commandExecutor.execute(new GetUsersWithPrivilegeCmd(name));
+        throw new RuntimeException("Not implemented");
     }
 }

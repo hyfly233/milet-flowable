@@ -26,22 +26,6 @@ public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
     }
 
     @Override
-    public Group createNewGroup(String groupId) {
-        SysRole role = customIdentityService.getRoleById(groupId);
-
-        if (role != null) {
-            GroupEntity groupEntity = new GroupEntityImpl();
-            groupEntity.setId(role.getId());
-            groupEntity.setName(role.getRoleCode());
-            groupEntity.setType(role.getRoleCode());
-
-            return groupEntity;
-        }
-
-        return null;
-    }
-
-    @Override
     public GroupQuery createNewGroupQuery() {
         return new GroupQueryImpl(getCommandExecutor());
     }
@@ -99,27 +83,52 @@ public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
 
     @Override
     public long findGroupCountByQueryCriteria(GroupQueryImpl query) {
-        return dataManager.findGroupCountByQueryCriteria(query);
+        return 0;
     }
 
     @Override
     public List<Group> findGroupsByUser(String userId) {
-        return dataManager.findGroupsByUser(userId);
+
+        List<Group> groupList = new ArrayList<>();
+
+        if (userId != null && userId.length() > 0) {
+            List<SysRole> roles = customIdentityService.getRoleByUserId(userId);
+
+            if (!roles.isEmpty()) {
+                roles.forEach(role -> {
+                    GroupEntity groupEntity = new GroupEntityImpl();
+                    groupEntity.setId(role.getId());
+                    groupEntity.setName(role.getRoleCode());
+                    groupEntity.setType(role.getRoleCode());
+
+                    groupList.add(groupEntity);
+                });
+            }
+        }
+        return groupList;
     }
 
     @Override
     public List<Group> findGroupsByNativeQuery(Map<String, Object> parameterMap) {
-        return dataManager.findGroupsByNativeQuery(parameterMap);
+        List<Group> groupList = new ArrayList<>();
+        return groupList;
     }
 
     @Override
     public long findGroupCountByNativeQuery(Map<String, Object> parameterMap) {
-        return dataManager.findGroupCountByNativeQuery(parameterMap);
+        return 0;
+    }
+
+    // ----------- 不在此处实现 -----------
+
+    @Override
+    public Group createNewGroup(String groupId) {
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Group> findGroupsByPrivilegeId(String privilegeId) {
-        return dataManager.findGroupsByPrivilegeId(privilegeId);
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
@@ -131,6 +140,4 @@ public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
     public void delete(String groupId) {
         throw new RuntimeException("Not implemented");
     }
-
-
 }

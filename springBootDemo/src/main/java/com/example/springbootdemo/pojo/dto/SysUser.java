@@ -183,6 +183,7 @@ public class SysUser {
     @TableField(value = "client_id")
     private String clientId;
 
+    @TableField(exist = false)
     private List<SysRole> roles;
 
     public static final String COL_ID = "id";

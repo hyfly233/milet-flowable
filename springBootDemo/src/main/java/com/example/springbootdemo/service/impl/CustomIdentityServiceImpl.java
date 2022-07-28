@@ -3,6 +3,7 @@ package com.example.springbootdemo.service.impl;
 import com.example.springbootdemo.dao.SysRoleMapper;
 import com.example.springbootdemo.dao.SysUserMapper;
 import com.example.springbootdemo.pojo.dto.SysRole;
+import com.example.springbootdemo.pojo.dto.SysUser;
 import com.example.springbootdemo.service.CustomIdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class CustomIdentityServiceImpl implements CustomIdentityService {
     @Override
     public SysRole getRoleById(String roleId) {
         return sysRoleMapper.selectById(roleId);
+    }
+
+    @Override
+    public SysUser getUserById(String userId) {
+        return sysUserMapper.selectById(userId);
     }
 }

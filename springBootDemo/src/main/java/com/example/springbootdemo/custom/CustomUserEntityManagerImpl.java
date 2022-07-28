@@ -1,10 +1,12 @@
 package com.example.springbootdemo.custom;
 
+import com.example.springbootdemo.pojo.dto.SysUser;
 import com.example.springbootdemo.service.CustomIdentityService;
 import org.flowable.idm.api.*;
 import org.flowable.idm.engine.IdmEngineConfiguration;
 import org.flowable.idm.engine.impl.UserQueryImpl;
 import org.flowable.idm.engine.impl.persistence.entity.UserEntity;
+import org.flowable.idm.engine.impl.persistence.entity.UserEntityImpl;
 import org.flowable.idm.engine.impl.persistence.entity.UserEntityManagerImpl;
 import org.flowable.idm.engine.impl.persistence.entity.data.UserDataManager;
 
@@ -22,11 +24,20 @@ public class CustomUserEntityManagerImpl extends UserEntityManagerImpl {
 
     @Override
     public UserEntity findById(String entityId) {
-        return null;
-    }
+        if (entityId != null && entityId.length() > 0) {
+            SysUser user = customIdentityService.getUserById(entityId);
 
-    @Override
-    public User createNewUser(String userId) {
+            UserEntity userEntity = new UserEntityImpl();
+            userEntity.setId(user.getId());
+            userEntity.setDisplayName(user.getUsername());
+            userEntity.setFirstName(user.getUsername());
+            userEntity.setLastName(user.getUsername());
+            userEntity.setEmail(user.getEmail());
+            userEntity.setPassword(user.getPassword());
+
+            return userEntity;
+        }
+
         return null;
     }
 
@@ -45,7 +56,6 @@ public class CustomUserEntityManagerImpl extends UserEntityManagerImpl {
         return null;
     }
 
-
     @Override
     public List<User> findUsersByNativeQuery(Map<String, Object> parameterMap) {
         return null;
@@ -59,6 +69,13 @@ public class CustomUserEntityManagerImpl extends UserEntityManagerImpl {
     @Override
     public List<User> findUsersByPrivilegeId(String name) {
         return dataManager.findUsersByPrivilegeId(name);
+    }
+
+    // ----------- 不在此处实现 -----------
+
+    @Override
+    public User createNewUser(String userId) {
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
