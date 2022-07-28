@@ -1,7 +1,7 @@
 package com.example.springbootdemo.custom;
 
-import com.example.springbootdemo.dao.SysRoleMapper;
 import com.example.springbootdemo.pojo.dto.SysRole;
+import com.example.springbootdemo.service.CustomIdentityService;
 import org.flowable.idm.api.Group;
 import org.flowable.idm.api.GroupQuery;
 import org.flowable.idm.engine.IdmEngineConfiguration;
@@ -10,24 +10,24 @@ import org.flowable.idm.engine.impl.persistence.entity.GroupEntity;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntityImpl;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntityManagerImpl;
 import org.flowable.idm.engine.impl.persistence.entity.data.GroupDataManager;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+//@Component
 public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
 
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
+    private CustomIdentityService customIdentityService;
 
-    public CustomGroupEntityManagerImpl(IdmEngineConfiguration idmEngineConfiguration, GroupDataManager groupDataManager) {
+    public CustomGroupEntityManagerImpl(CustomIdentityService customIdentityService, IdmEngineConfiguration idmEngineConfiguration, GroupDataManager groupDataManager) {
         super(idmEngineConfiguration, groupDataManager);
+        this.customIdentityService = customIdentityService;
     }
 
     @Override
     public Group createNewGroup(String groupId) {
-        SysRole role = sysRoleMapper.selectById(groupId);
+        SysRole role = customIdentityService.getRoleById(groupId);
 
         if (role != null) {
             GroupEntity groupEntity = new GroupEntityImpl();
@@ -64,18 +64,20 @@ public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
 //            }
 //        }
 //
-//        if (query.getUserId() != null) {
-//            SysRole role = sysRoleMapper.selectByUserId(query.getUserId());
-//
-//            if (role != null) {
-//                GroupEntity groupEntity = new GroupEntityImpl();
-//                groupEntity.setId(role.getId());
-//                groupEntity.setName(role.getRoleCode());
-//                groupEntity.setType(role.getRoleCode());
-//
-//                return List.of(groupEntity);
-//            }
-//        }
+        if (query.getUserId() != null) {
+            List<SysRole> roles = customIdentityService.getRoleByUserId(query.getUserId());
+
+            if (!roles.isEmpty()) {
+                roles.forEach(role -> {
+                    GroupEntity groupEntity = new GroupEntityImpl();
+                    groupEntity.setId(role.getId());
+                    groupEntity.setName(role.getRoleCode());
+                    groupEntity.setType(role.getRoleCode());
+
+                    groupList.add(groupEntity);
+                });
+            }
+        }
 //
 //        if (query.getName() != null && query.getName().size() > 0) {
 //            List<SysRole> roles = sysRoleMapper.selectByRoleCode(query.getName());

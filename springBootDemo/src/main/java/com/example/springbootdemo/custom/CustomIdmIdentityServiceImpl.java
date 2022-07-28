@@ -1,5 +1,6 @@
 package com.example.springbootdemo.custom;
 
+import com.example.springbootdemo.service.CustomIdentityService;
 import org.flowable.idm.api.*;
 import org.flowable.idm.engine.IdmEngineConfiguration;
 import org.flowable.idm.engine.impl.IdmIdentityServiceImpl;
@@ -11,8 +12,11 @@ import java.util.List;
 
 public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
-    public CustomIdmIdentityServiceImpl(IdmEngineConfiguration idmEngineConfiguration) {
+    private CustomIdentityService customIdentityService;
+
+    public CustomIdmIdentityServiceImpl(CustomIdentityService customIdentityService, IdmEngineConfiguration idmEngineConfiguration) {
         super(idmEngineConfiguration);
+        this.customIdentityService = customIdentityService;
     }
 
     @Override

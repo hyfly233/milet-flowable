@@ -63,8 +63,9 @@
         <result column="depart_ids" jdbcType="LONGVARCHAR" property="departIds"/>
         <result column="rel_tenant_ids" jdbcType="VARCHAR" property="relTenantIds"/>
         <result column="client_id" jdbcType="VARCHAR" property="clientId"/>
-        <collection property="roles" ofType="com.example.springbootdemo.pojo.dto.SysRole" select="">
-        </collection>
+        <collection property="roles" column="id" javaType="java.util.ArrayList"
+                    ofType="com.example.springbootdemo.pojo.dto.SysRole"
+                    select="com.example.springbootdemo.dao.SysRoleMapper.getSysRoleByUserId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -98,9 +99,42 @@
         client_id
     </sql>
 
-    <select id="getAllUserIncludeRole" resultMap="BaseResultMap">
+    <select id="getAllUserIncludeRole" resultMap="ResultIncludeRoleMap">
         select
         <include refid="Base_Column_List"/>
         from sys_user
+    </select>
+
+    <select id="getSysUserByRoleId" resultMap="BaseResultMap">
+        select su.id,
+               su.username,
+               su.realname,
+               su.`password`,
+               su.salt,
+               su.avatar,
+               su.birthday,
+               su.sex,
+               su.email,
+               su.phone,
+               su.org_code,
+               su.`status`,
+               su.del_flag,
+               su.third_id,
+               su.third_type,
+               su.activiti_sync,
+               su.work_no,
+               su.post,
+               su.telephone,
+               su.create_by,
+               su.create_time,
+               su.update_by,
+               su.update_time,
+               su.user_identity,
+               su.depart_ids,
+               su.rel_tenant_ids,
+               su.client_id
+        from sys_user_role sur
+                 left join sys_user su on sur.user_id = su.id
+        where sur.role_id = #{roleId}
     </select>
 </mapper>

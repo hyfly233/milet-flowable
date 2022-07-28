@@ -5,9 +5,11 @@ import com.example.springbootdemo.dao.SysUserMapper;
 import com.example.springbootdemo.pojo.dto.SysUser;
 import com.example.springbootdemo.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     @Autowired

@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
     List<SysUser> getAllUserIncludeRole();
+
+    List<SysUser> getSysUserByRoleId(String roleId);
 }

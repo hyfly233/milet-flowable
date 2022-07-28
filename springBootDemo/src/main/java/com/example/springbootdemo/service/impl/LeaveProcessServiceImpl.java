@@ -24,7 +24,7 @@ public class LeaveProcessServiceImpl implements LeaveProcessService {
 
         TaskQuery taskQuery = taskService.createTaskQuery();
 
-        taskQuery = taskQuery.taskCandidateUser("userId");
+        taskQuery = taskQuery.taskAssignee("userId");
 
         List<Task> list = taskQuery.list();
 
@@ -34,12 +34,6 @@ public class LeaveProcessServiceImpl implements LeaveProcessService {
             System.out.println(task.getAssignee());
             System.out.println(" ------------ ");
         });
-
-//        UserQuery userQuery = idmIdentityService.createUserQuery();
-//
-//        userQuery = userQuery.userId("123");
-//
-//        userQuery.list();
 
         return null;
     }
