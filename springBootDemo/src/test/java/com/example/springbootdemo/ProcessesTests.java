@@ -174,10 +174,11 @@ class ProcessesTests {
      */
     @Test
     void claimTask() {
-        taskService.claim("taskId", "userId");
+        //
+        taskService.claim("50ab5726-0bf6-11ed-8e16-d23c1f5533c2", "userId");
 
         // 归还任务
-        taskService.claim("taskId", "null");
+//        taskService.claim("taskId", "null");
     }
 
     // -------------- 历史任务相关 --------------

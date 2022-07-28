@@ -75,7 +75,7 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     @Override
     public GroupQuery createGroupQuery() {
-        throw new RuntimeException("Not implemented");
+        return super.createGroupQuery();
     }
 
     @Override

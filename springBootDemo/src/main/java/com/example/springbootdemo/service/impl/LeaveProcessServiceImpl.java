@@ -3,8 +3,9 @@ package com.example.springbootdemo.service.impl;
 import com.example.springbootdemo.service.LeaveProcessService;
 import org.flowable.engine.TaskService;
 import org.flowable.idm.api.IdmIdentityService;
-import org.flowable.idm.api.UserQuery;
+import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskInfo;
+import org.flowable.task.api.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,24 @@ public class LeaveProcessServiceImpl implements LeaveProcessService {
     @Override
     public List<TaskInfo> taskList() {
 
-        UserQuery userQuery = idmIdentityService.createUserQuery();
+        TaskQuery taskQuery = taskService.createTaskQuery();
 
-        userQuery = userQuery.userId("123");
+        taskQuery = taskQuery.taskCandidateUser("userId");
 
-        userQuery.list();
+        List<Task> list = taskQuery.list();
+
+        list.forEach(task -> {
+            System.out.println(task.getName());
+            System.out.println(task.getId());
+            System.out.println(task.getAssignee());
+            System.out.println(" ------------ ");
+        });
+
+//        UserQuery userQuery = idmIdentityService.createUserQuery();
+//
+//        userQuery = userQuery.userId("123");
+//
+//        userQuery.list();
 
         return null;
     }

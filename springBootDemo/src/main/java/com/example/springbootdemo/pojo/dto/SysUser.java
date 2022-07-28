@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -180,6 +182,8 @@ public class SysUser {
      */
     @TableField(value = "client_id")
     private String clientId;
+
+    private List<SysRole> roles;
 
     public static final String COL_ID = "id";
 
