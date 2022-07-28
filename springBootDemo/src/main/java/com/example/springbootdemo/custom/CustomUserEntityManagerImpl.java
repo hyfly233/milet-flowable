@@ -53,7 +53,7 @@ public class CustomUserEntityManagerImpl extends UserEntityManagerImpl {
 
     @Override
     public UserQuery createNewUserQuery() {
-        return null;
+        return new CustomUserQueryImpl(customIdentityService);
     }
 
     @Override

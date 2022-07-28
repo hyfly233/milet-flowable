@@ -29,6 +29,16 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
         return new CustomGroupQueryImpl(customIdentityService);
     }
 
+    /**
+     * 在流程开始的业务逻辑中（startEvent）使用，flowable 将 userId 存入 act_hi_procinst 表中
+     *
+     * @param authenticatedUserId 开启流程的 userId
+     */
+    @Override
+    public void setAuthenticatedUserId(String authenticatedUserId) {
+        super.setAuthenticatedUserId(authenticatedUserId);
+    }
+
     // ----------- 不在此处实现 -----------
 
     @Override
@@ -118,11 +128,6 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     @Override
     public void setUserPicture(String userId, Picture picture) {
-        throw new RuntimeException("Not implemented");
-    }
-
-    @Override
-    public void setAuthenticatedUserId(String authenticatedUserId) {
         throw new RuntimeException("Not implemented");
     }
 

@@ -18,7 +18,7 @@ import java.util.Map;
 //@Component
 public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
 
-    private CustomIdentityService customIdentityService;
+    private final CustomIdentityService customIdentityService;
 
     public CustomGroupEntityManagerImpl(CustomIdentityService customIdentityService, IdmEngineConfiguration idmEngineConfiguration, GroupDataManager groupDataManager) {
         super(idmEngineConfiguration, groupDataManager);
@@ -27,7 +27,7 @@ public class CustomGroupEntityManagerImpl extends GroupEntityManagerImpl {
 
     @Override
     public GroupQuery createNewGroupQuery() {
-        return new GroupQueryImpl(getCommandExecutor());
+        return new CustomGroupQueryImpl(customIdentityService);
     }
 
     @Override
