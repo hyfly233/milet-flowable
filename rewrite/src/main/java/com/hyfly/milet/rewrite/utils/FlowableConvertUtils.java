@@ -1,7 +1,7 @@
 package com.hyfly.milet.rewrite.utils;
 
-import com.example.flowable.pojo.dto.SysRole;
-import com.example.flowable.pojo.dto.SysUser;
+import com.hyfly.milet.rewrite.pojo.dto.SysRole;
+import com.hyfly.milet.rewrite.pojo.dto.SysUser;
 import org.flowable.idm.api.Group;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntity;
 import org.flowable.idm.engine.impl.persistence.entity.GroupEntityImpl;

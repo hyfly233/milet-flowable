@@ -1,9 +1,9 @@
 package com.hyfly.milet.rewrite.config;
 
-import com.example.flowable.custom.CustomGroupEntityManagerImpl;
-import com.example.flowable.custom.CustomIdmIdentityServiceImpl;
-import com.example.flowable.custom.CustomUserEntityManagerImpl;
-import com.example.flowable.service.CustomIdentityService;
+import com.hyfly.milet.rewrite.custom.CustomGroupEntityManagerImpl;
+import com.hyfly.milet.rewrite.custom.CustomIdmIdentityServiceImpl;
+import com.hyfly.milet.rewrite.custom.CustomUserEntityManagerImpl;
+import com.hyfly.milet.rewrite.service.CustomIdentityService;
 import org.flowable.idm.spring.SpringIdmEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;

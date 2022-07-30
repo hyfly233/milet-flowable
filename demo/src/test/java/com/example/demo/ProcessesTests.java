@@ -70,7 +70,7 @@ class ProcessesTests {
      */
     @Test
     void deleteProcessDefinition() {
-        repositoryService.deleteDeployment("deploymentId", true);
+        repositoryService.deleteDeployment("leave_process:3:0c8da25d-0fb1-11ed-977a-d23c1f5533c2", true);
     }
 
     // -------------- 流程实例相关 --------------
@@ -140,7 +140,7 @@ class ProcessesTests {
      */
     @Test
     void deleteProcessInstance() {
-        runtimeService.deleteProcessInstance("processInstanceId", "流程实例删除原因");
+        runtimeService.deleteProcessInstance("5107d90b-0fb1-11ed-9161-d23c1f5533c2", "流程实例删除原因");
     }
 
     // -------------- 任务处理相关 --------------

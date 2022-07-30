@@ -1,7 +1,7 @@
 package com.hyfly.milet.rewrite.custom;
 
-import com.example.flowable.pojo.dto.SysRole;
-import com.example.flowable.service.CustomIdentityService;
+import com.hyfly.milet.rewrite.pojo.dto.SysRole;
+import com.hyfly.milet.rewrite.service.CustomIdentityService;
 import org.flowable.idm.api.Group;
 import org.flowable.idm.api.GroupQuery;
 import org.flowable.idm.engine.IdmEngineConfiguration;
