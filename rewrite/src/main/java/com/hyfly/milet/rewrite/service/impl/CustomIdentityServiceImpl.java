@@ -17,12 +17,6 @@ public class CustomIdentityServiceImpl implements CustomIdentityService {
     @Autowired
     private CustomIdentityMapper identityMapper;
 
-    @Autowired
-    private SysRoleServiceImpl roleService;
-
-    @Autowired
-    private SysUserServiceImpl userService;
-
     @Override
     public List<SysRole> getRoleByUserId(String userId) {
         List<SysRole> list = new ArrayList<>();
@@ -35,12 +29,12 @@ public class CustomIdentityServiceImpl implements CustomIdentityService {
 
     @Override
     public SysRole getRoleById(String roleId) {
-        return roleService.getById(roleId);
+        return identityMapper.getRoleById(roleId);
     }
 
     @Override
     public SysUser getUserById(String userId) {
-        return userService.getById(userId);
+        return identityMapper.getUserById(userId);
     }
 
     @Override

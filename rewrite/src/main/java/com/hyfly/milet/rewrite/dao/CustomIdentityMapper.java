@@ -15,4 +15,8 @@ public interface CustomIdentityMapper {
     List<SysUser> selectSysUserByUserQuery(UserQueryImpl userQuery);
 
     List<SysRole> selectSysRoleByGroupQuery(GroupQueryImpl groupQuery);
+
+    SysRole getRoleById(String roleId);
+
+    SysUser getUserById(String userId);
 }

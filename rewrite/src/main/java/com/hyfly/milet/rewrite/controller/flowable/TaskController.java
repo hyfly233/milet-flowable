@@ -1,9 +1,9 @@
-package com.hyfly.milet.rewrite.controller;
+package com.hyfly.milet.rewrite.controller.flowable;
 
 
 import com.hyfly.milet.rewrite.pojo.dto.TaskQueryParam;
 import com.hyfly.milet.rewrite.pojo.vo.Result;
-import io.swagger.annotations.Api;
+import com.hyfly.milet.rewrite.pojo.vo.TaskVo;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.flowable.engine.FormService;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Api(value = "待办任务接口")
 @Controller
 @RequestMapping("/flow/task")
 public class TaskController {
@@ -39,13 +38,12 @@ public class TaskController {
     @Autowired
     private HistoryService historyService;
 
-    @Autowired
-    private SysBaseApiImpl sysBaseApiImpl;
+//    @Autowired
+//    private SysBaseApiImpl sysBaseApiImpl;
 
     /**
      * 查询我的待办任务列表
      */
-    @ApiOperation("查询我的待办任务列表")
     @GetMapping("/taskList")
     @ResponseBody
     public Result<?> taskList(TaskQueryParam param) {
@@ -89,7 +87,6 @@ public class TaskController {
     /**
      * 查询所有待办任务列表
      */
-    @ApiOperation("查询所有待办任务列表")
     @GetMapping("/allTask")
     @ResponseBody
     public Result<?> allTask(TaskQueryParam param) {
@@ -125,22 +122,20 @@ public class TaskController {
         return Result.OK(tasks);
     }
 
-    @ApiOperation("办理一个用户任务")
-    @PostMapping(value = "/completeTask/{taskId}")
+    @PostMapping(value = "/claimTask/{taskId}")
     @ResponseBody
     public Result<?> claimTask(@PathVariable("taskId") String taskId, @RequestBody(required = false) Map<String, Object> variables) {
-        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+//        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 //        todo String username = user.getUsername();
         String username = "admin";
         taskService.claim(taskId, username);
         return Result.OK();
     }
 
-    @ApiOperation("办理一个用户任务")
     @PostMapping(value = "/completeTask/{taskId}")
     @ResponseBody
     public Result<?> completeTask(@PathVariable("taskId") String taskId, @RequestBody(required = false) Map<String, Object> variables) {
-        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+//        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 //        todo String username = user.getUsername();
         String username = "admin";
 
@@ -161,7 +156,6 @@ public class TaskController {
         return Result.OK();
     }
 
-    @ApiOperation("任务办理历史")
     @GetMapping(value = "/history/{taskId}")
     @ResponseBody
     public Result<List<TaskVo>> history(@PathVariable String taskId) {
