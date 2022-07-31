@@ -24,7 +24,6 @@ public class FlowableConvertUtils {
         userEntity.setId(user.getId());
         userEntity.setDisplayName(user.getUsername());
         userEntity.setEmail(user.getEmail());
-        userEntity.setDeleted(user.getDelFlag());
 
         return userEntity;
     }
@@ -38,6 +37,6 @@ public class FlowableConvertUtils {
         group.setId(sysRole.getId());
         group.setName(sysRole.getRoleName());
         group.setType(sysRole.getRoleCode());
-        return null;
+        return group;
     }
 }

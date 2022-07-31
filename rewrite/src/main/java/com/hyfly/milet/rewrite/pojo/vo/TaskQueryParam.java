@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class TaskVo implements Serializable {
+public class TaskQueryParam implements Serializable {
 
     String taskId;
 

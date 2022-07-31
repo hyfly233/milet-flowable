@@ -59,16 +59,47 @@ public class LeaveTests {
 
     @Test
     void claimTask() {
-        taskService.claim("1bc0f11f-0fb5-11ed-906a-d23c1f5533c2", "user1");
+        taskService.claim("9ab5a8b3-10a8-11ed-a8a9-d23c1f5533c2", "user2");
+    }
+
+    @Test
+    void assigneeTask() {
+        taskService.setAssignee("9ab5a8b3-10a8-11ed-a8a9-d23c1f5533c2", "user3");
     }
 
     @Test
     void completeTask() {
-        String taskId = "1bc0f11f-0fb5-11ed-906a-d23c1f5533c2";
+        String taskId = "9ab5a8b3-10a8-11ed-a8a9-d23c1f5533c2";
         String userId = "user10";
-        String comment = "同意";
+        String comment = "审批结果同意";
         String outcome = "agree";
 
-//        RuntimeServiceUtil.completeTask(runtimeService, taskId, userId, comment, outcome);
+        Map<String, Object> variables = new HashMap<>(1);
+//        variables.put("deptAgree", "true");
+//        variables.put("assignHrName", "user2");
+
+        variables.put("hrAgree", "true");
+
+        String processInstanceId = taskService.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
+        taskService.addComment(taskId, processInstanceId, comment);
+        taskService.complete(taskId, variables);
+
+
+//        SysUser user = getSysUser();
+//        String username = user.getLoginName();
+//        taskService.setAssignee(taskId, username);
+//        // 查出流程实例id
+//        String processInstanceId = taskService.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
+//        if (variables == null) {
+//            taskService.complete(taskId);
+//        } else {
+//            // 添加审批意见
+//            if (variables.get("comment") != null) {
+//                taskService.addComment(taskId, processInstanceId, (String) variables.get("comment"));
+//                variables.remove("comment");
+//            }
+//            taskService.complete(taskId, variables);
+//        }
+//        return AjaxResult.success();
     }
 }
