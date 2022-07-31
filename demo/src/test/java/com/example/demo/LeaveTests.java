@@ -5,6 +5,7 @@ import com.example.demo.utils.RuntimeServiceUtil;
 import org.flowable.engine.IdentityService;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,9 @@ public class LeaveTests {
 
     @Autowired
     private IdentityService identityService;
+
+    @Autowired
+    private TaskService taskService;
 
     /**
      * 第一步
@@ -51,5 +55,20 @@ public class LeaveTests {
 //        流程实例版本：3
 //        业务key：business_leave_1
         RuntimeServiceUtil.initProcessInstance(runtimeService, "leave_process", businessKey, variables);
+    }
+
+    @Test
+    void claimTask() {
+        taskService.claim("1bc0f11f-0fb5-11ed-906a-d23c1f5533c2", "user1");
+    }
+
+    @Test
+    void completeTask() {
+        String taskId = "1bc0f11f-0fb5-11ed-906a-d23c1f5533c2";
+        String userId = "user10";
+        String comment = "同意";
+        String outcome = "agree";
+
+//        RuntimeServiceUtil.completeTask(runtimeService, taskId, userId, comment, outcome);
     }
 }

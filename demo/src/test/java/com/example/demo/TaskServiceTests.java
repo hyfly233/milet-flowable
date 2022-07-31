@@ -17,7 +17,7 @@ class TaskServiceTests {
 
     @Test
     void createTaskQuery() {
-        taskService.createTaskQuery().taskCandidateOrAssigned("user1").list().forEach(task -> {
+        taskService.createTaskQuery().taskCandidateOrAssigned("user6").list().forEach(task -> {
             System.out.println("task.getId() = " + task.getId());
             System.out.println("task.getName() = " + task.getName());
             System.out.println("task.getAssignee() = " + task.getAssignee());
