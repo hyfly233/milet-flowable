@@ -59,4 +59,9 @@ class TaskServiceTests {
             System.out.println(" ------------------ ");
         });
     }
+
+    @Test
+    void test(){
+        System.out.println(Runtime.getRuntime().availableProcessors());
+    }
 }

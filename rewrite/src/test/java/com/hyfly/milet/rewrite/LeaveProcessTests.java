@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 
 @SpringBootTest
-class RewriteApplicationTests {
+class LeaveProcessTests {
     @Autowired
     private LeaveProcessService leaveProcessService;
 
