@@ -22,10 +22,10 @@ class RewriteApplicationTests {
     @Test
     void startLeaveProcess() {
         LeaveApplyParam param = LeaveApplyParam.builder()
-                .userId("zhangsan")
+                .userId("4")
                 .applyTime(new Date())
                 .assigneeType("group")
-                .assigneeDeptGroup("ee8626f80f7c2619917b6236f3a7f02b")
+                .assigneeDeptGroup("1")
                 .build();
 
         leaveProcessService.startLeaveProcess(param);
@@ -63,15 +63,15 @@ class RewriteApplicationTests {
 
     @Test
     public void list() {
-        String userIdOrGroupId = "3d464b4ea0d2491aab8a7bde74c57e95";
+        String userIdOrGroupId = "3";
         leaveProcessService.taskList(userIdOrGroupId).forEach(i -> {
-//            if ("指定部门组用户审核".equals(i.getTaskName())) {
-//                System.out.println(i);
-//            }
-
-            if ("人事审核".equals(i.getTaskName())) {
+            if ("指定部门组用户审核".equals(i.getTaskName())) {
                 System.out.println(i);
             }
+
+//            if ("人事审核".equals(i.getTaskName())) {
+//                System.out.println(i);
+//            }
         });
     }
 
