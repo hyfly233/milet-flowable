@@ -17,11 +17,16 @@ public class LeaveProcessController {
     @Autowired
     private LeaveProcessService leaveProcessService;
 
+    @GetMapping("/list")
+    public Result<?> list() {
+//        return Result.success(leaveProcessService.list());
+        return null;
+    }
+
     /**
      * 发起请假流程
      */
     @PostMapping("/add")
-    @ResponseBody
     public Result<?> startLeaveProcess(LeaveApplyParam param) {
         param.setApplyTime(new Date());
         return Result.OK(leaveProcessService.startLeaveProcess(param));
@@ -30,7 +35,7 @@ public class LeaveProcessController {
     /**
      * 部门审批
      */
-    @GetMapping("/deptGroupApproval")
+    @PutMapping("/deptGroupApproval")
     public void deptGroupApproval(String taskId, DeptApprovalDto dto) {
         leaveProcessService.doDeptGroupApproval(taskId, dto);
     }
@@ -38,7 +43,7 @@ public class LeaveProcessController {
     /**
      * 部门审批
      */
-    @GetMapping("/deptUserApproval")
+    @PutMapping("/deptUserApproval")
     public void deptUserApproval(String taskId, DeptApprovalDto dto) {
         leaveProcessService.doDeptUserApproval(taskId, dto);
     }
@@ -46,12 +51,12 @@ public class LeaveProcessController {
     /**
      * 部门审批
      */
-    @GetMapping("/hrApproval")
+    @PutMapping("/hrApproval")
     public void hrApproval(String taskId, HrApprovalDto dto) {
         leaveProcessService.doHrApproval(taskId, dto);
     }
 
-    @GetMapping("/list")
+    @PutMapping("/claimTask")
     public void claimTask(String taskId, String userId) {
         leaveProcessService.claimTask(taskId, userId);
     }
