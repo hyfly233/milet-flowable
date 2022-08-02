@@ -20,5 +20,5 @@ import org.springframework.context.annotation.Configuration;
         FlowableSecurityAutoConfiguration.class,
         OAuth2ClientAutoConfiguration.class,
 })
-public class FlowableUiSecurityAutoConfiguration {
+public class FlowableUiSecurityAutoConfiguration_后缀 {
 }

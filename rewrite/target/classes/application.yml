@@ -16,11 +16,18 @@ mybatis:
 
 # flowable 设置
 flowable:
-  # 自动创建表，如果不需要，可以关闭该配置
+  # 自动创建表，生产环境关闭该配置
   database-schema-update: true
   # flowable 定时任务
   async-executor-activate: off
-
+  # 随便配置，不会用到，只是为了让 flowable 启动
+  common:
+    app:
+      idm-url: a
+      idm-admin:
+        user: a
+        password: a
+        
 # flowable 日志设置
 logging:
   level:

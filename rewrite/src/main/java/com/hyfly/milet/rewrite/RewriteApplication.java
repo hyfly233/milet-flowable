@@ -2,8 +2,11 @@ package com.hyfly.milet.rewrite;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.hyfly.milet.rewrite", "org.flowable.ui"})
 public class RewriteApplication {
 
     public static void main(String[] args) {
