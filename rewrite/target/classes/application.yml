@@ -1,12 +1,28 @@
+database:
+  name: flowable-spring-boot
+
 server:
   port: 9090
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/flowable-spring-boot?characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/${database.name}?characterEncoding=UTF-8&nullCatalogMeansCurrent=true
     username: root
     password: 123456
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
+
+# flowable 设置
+flowable:
+  # 自动创建表，如果不需要，可以关闭该配置
+  database-schema-update: true
+  # flowable 定时任务
+  async-executor-activate: off
+
+# flowable 日志设置
+logging:
+  level:
+    org.flowable.engine.impl.persistence.entity.*: debug
+    org.flowable.task.service.impl.persistence.entity.*: debug

@@ -19,8 +19,7 @@ public class FlowableIdmConfig {
     @Bean
     public EngineConfigurationConfigurer<SpringIdmEngineConfiguration> customIdmEngineConfigurer() {
         return cfg -> {
-//            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService, cfg.getIdmEngineConfiguration()));
-            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService));
+            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService, cfg.getIdmEngineConfiguration()));
             cfg.setGroupEntityManager(new CustomGroupEntityManagerImpl(customIdentityService, cfg, cfg.getGroupDataManager()));
             cfg.setUserEntityManager(new CustomUserEntityManagerImpl(customIdentityService, cfg, cfg.getUserDataManager()));
         };

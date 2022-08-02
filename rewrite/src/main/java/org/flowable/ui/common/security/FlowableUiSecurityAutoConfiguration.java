@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 该配置类是为了屏蔽 flowable-ui 的 security 问题
+ *
+ * @author hyfly
+ */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter({
         IdmEngineServicesAutoConfiguration.class,
