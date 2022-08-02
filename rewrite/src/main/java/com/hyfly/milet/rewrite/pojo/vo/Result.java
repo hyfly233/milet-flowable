@@ -1,7 +1,6 @@
 package com.hyfly.milet.rewrite.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -41,7 +40,6 @@ public class Result<T> implements Serializable {
     /**
      * 时间戳
      */
-    @ApiModelProperty(value = "时间戳")
     private long timestamp = System.currentTimeMillis();
     @JsonIgnore
     private String onlTable;

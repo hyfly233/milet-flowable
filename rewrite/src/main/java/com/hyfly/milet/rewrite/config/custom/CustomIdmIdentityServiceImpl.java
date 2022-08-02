@@ -2,7 +2,6 @@ package com.hyfly.milet.rewrite.config.custom;
 
 import com.hyfly.milet.rewrite.service.CustomIdentityService;
 import org.flowable.idm.api.*;
-import org.flowable.idm.engine.IdmEngineConfiguration;
 import org.flowable.idm.engine.impl.IdmIdentityServiceImpl;
 
 import java.util.List;
@@ -14,10 +13,16 @@ public class CustomIdmIdentityServiceImpl extends IdmIdentityServiceImpl {
 
     private final CustomIdentityService customIdentityService;
 
-    public CustomIdmIdentityServiceImpl(CustomIdentityService customIdentityService, IdmEngineConfiguration idmEngineConfiguration) {
-        super(idmEngineConfiguration);
+//    public CustomIdmIdentityServiceImpl(CustomIdentityService customIdentityService, IdmEngineConfiguration idmEngineConfiguration) {
+//        super(idmEngineConfiguration);
+//        this.customIdentityService = customIdentityService;
+//    }
+
+    public CustomIdmIdentityServiceImpl(CustomIdentityService customIdentityService) {
+        super();
         this.customIdentityService = customIdentityService;
     }
+
 
     @Override
     public UserQuery createUserQuery() {

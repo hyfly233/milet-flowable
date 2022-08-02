@@ -2,8 +2,6 @@ package com.hyfly.milet.rewrite.controller.flowable;
 
 import com.hyfly.milet.rewrite.pojo.vo.ProcessVo;
 import com.hyfly.milet.rewrite.pojo.vo.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.flowable.bpmn.model.BpmnModel;
@@ -29,7 +27,6 @@ import java.util.zip.ZipInputStream;
 /**
  * 流程管理
  */
-@Api(value = "部署管理接口")
 @Controller
 @RequestMapping("/flow/manage")
 public class FlowController {
@@ -52,7 +49,6 @@ public class FlowController {
     @Autowired
     private ProcessEngineConfiguration configuration;
 
-    @ApiOperation("查询已部署工作流列表")
     @GetMapping("/processLists")
     @ResponseBody
     public Result<?> getlist(@RequestParam(required = false) String key, @RequestParam(required = false) String name,
@@ -83,7 +79,6 @@ public class FlowController {
         return Result.OK(list);
     }
 
-    @ApiOperation("查看工作流图片")
     @GetMapping(value = "/resource/png/{pid}")
     public void resource(@PathVariable("pid") String pid, HttpServletResponse response) throws Exception {
         BpmnModel bpmnModel = repositoryService.getBpmnModel(pid);
@@ -93,7 +88,6 @@ public class FlowController {
         IOUtils.copy(is, output);
     }
 
-    @ApiOperation("查看工作流定义")
     @GetMapping(value = "/processDefinition/{pid}/{resource}")
     public void showProcessDefinition(@PathVariable("pid") String pid, @PathVariable(value = "resource") String resource, HttpServletResponse response) throws Exception {
         InputStream is = repositoryService.getResourceAsStream(pid, resource);
@@ -101,7 +95,6 @@ public class FlowController {
         IOUtils.copy(is, output);
     }
 
-    @ApiOperation("上传一个工作流文件")
     @PostMapping("/flowableFileUpload")
     @ResponseBody
     public Result<?> flowableFileUpload(@RequestParam MultipartFile uploadFile) {
@@ -127,7 +120,6 @@ public class FlowController {
         return Result.OK("部署成功");
     }
 
-    @ApiOperation("删除一次部署的工作流")
     @DeleteMapping("/{deploymentId}")
     @ResponseBody
     public Result<String> remove(@PathVariable String deploymentId) {

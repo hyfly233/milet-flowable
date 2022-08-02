@@ -1,8 +1,8 @@
 package com.hyfly.milet.rewrite.config;
 
-import com.hyfly.milet.rewrite.custom.CustomGroupEntityManagerImpl;
-import com.hyfly.milet.rewrite.custom.CustomIdmIdentityServiceImpl;
-import com.hyfly.milet.rewrite.custom.CustomUserEntityManagerImpl;
+import com.hyfly.milet.rewrite.config.custom.CustomGroupEntityManagerImpl;
+import com.hyfly.milet.rewrite.config.custom.CustomIdmIdentityServiceImpl;
+import com.hyfly.milet.rewrite.config.custom.CustomUserEntityManagerImpl;
 import com.hyfly.milet.rewrite.service.CustomIdentityService;
 import org.flowable.idm.spring.SpringIdmEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
@@ -19,7 +19,8 @@ public class FlowableIdmConfig {
     @Bean
     public EngineConfigurationConfigurer<SpringIdmEngineConfiguration> customIdmEngineConfigurer() {
         return cfg -> {
-            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService, cfg.getIdmEngineConfiguration()));
+//            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService, cfg.getIdmEngineConfiguration()));
+            cfg.setIdmIdentityService(new CustomIdmIdentityServiceImpl(customIdentityService));
             cfg.setGroupEntityManager(new CustomGroupEntityManagerImpl(customIdentityService, cfg, cfg.getGroupDataManager()));
             cfg.setUserEntityManager(new CustomUserEntityManagerImpl(customIdentityService, cfg, cfg.getUserDataManager()));
         };
