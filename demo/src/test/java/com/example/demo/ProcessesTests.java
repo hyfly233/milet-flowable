@@ -70,7 +70,7 @@ class ProcessesTests {
      */
     @Test
     void deleteProcessDefinition() {
-        repositoryService.deleteDeployment("leave_process:3:0c8da25d-0fb1-11ed-977a-d23c1f5533c2", true);
+        repositoryService.deleteDeployment("2705df57-12da-11ed-94a7-d23c1f5533c2", true);
     }
 
     // -------------- 流程实例相关 --------------

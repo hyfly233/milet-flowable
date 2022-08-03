@@ -25,13 +25,12 @@ class TaskServiceTests {
     @Test
     void createTaskQuery() {
         taskService.createTaskQuery()
-//                .taskCandidateOrAssigned("user3")
+                .taskCandidateOrAssigned("user12")
                 .list().forEach(task -> {
             System.out.println("task.getId() = " + task.getId());
             System.out.println("task.getName() = " + task.getName());
             System.out.println("task.getOwner() = " + task.getOwner());
             System.out.println("task.getAssignee() = " + task.getAssignee());
-            System.out.println("task.getCaseVariables() = " + task.getCaseVariables().toString());
         });
     }
 
@@ -61,7 +60,7 @@ class TaskServiceTests {
     }
 
     @Test
-    void test(){
+    void test() {
         System.out.println(Runtime.getRuntime().availableProcessors());
     }
 }
