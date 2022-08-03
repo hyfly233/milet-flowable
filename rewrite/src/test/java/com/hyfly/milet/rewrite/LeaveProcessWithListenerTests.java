@@ -1,7 +1,7 @@
 package com.hyfly.milet.rewrite;
 
 import com.hyfly.milet.rewrite.pojo.dto.LeaveProcess.LeaveApplyParam;
-import com.hyfly.milet.rewrite.service.LeaveProcessWithListenerService;
+import com.hyfly.milet.rewrite.business.service.LeaveProcessWithListenerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
