@@ -18,6 +18,6 @@ public class TaskListenerTests {
 
     @Test
     void deployment() {
-        RepositoryServiceUtil.deployment(repositoryService, "taskTest.bpmn20.xml");
+        RepositoryServiceUtil.deployment(repositoryService, "beanTest.bpmn20.xml");
     }
 }
