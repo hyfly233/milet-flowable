@@ -9,7 +9,7 @@
         <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
       </extensionElements>
     </userTask>
-    <userTask id="managerApproval" name="经理审批" flowable:candidateUsers="${beanTestServiceImpl.getName(name)}" flowable:formFieldValidation="true">
+    <userTask id="managerApproval" name="经理审批" flowable:candidateUsers="${beanTestServiceImpl.getName('name')}" flowable:formFieldValidation="true">
       <documentation>经理审批</documentation>
     </userTask>
     <endEvent id="endEvent"></endEvent>

@@ -12,10 +12,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/beanTest")
-public class BeanTestController {
+@RequestMapping("/fixed")
+public class FixedListenerTestController {
 
-    private static final String PROCESS_DEFINITION_KEY = "beanTest";
+    private static final String PROCESS_DEFINITION_KEY = "listenerTest";
 
     @Autowired
     private RuntimeService runtimeService;
@@ -46,15 +46,12 @@ public class BeanTestController {
 
         String comment = "申请信息填写";
 
-        Map<String, Object> variables = new HashMap<>(1);
-//        variables.put("name", "user10");
-
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
 
         if (userId.equals(task.getAssignee())) {
             String processInstanceId = task.getProcessInstanceId();
             taskService.addComment(taskId, processInstanceId, comment);
-            taskService.complete(taskId, variables);
+            taskService.complete(taskId);
         }
 
         return "travelReimbursement";

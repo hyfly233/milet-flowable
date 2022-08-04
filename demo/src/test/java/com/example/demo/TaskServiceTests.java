@@ -25,7 +25,7 @@ class TaskServiceTests {
     @Test
     void createTaskQuery() {
         taskService.createTaskQuery()
-                .taskCandidateOrAssigned("user12")
+                .taskCandidateOrAssigned("user10")
                 .list().forEach(task -> {
             System.out.println("task.getId() = " + task.getId());
             System.out.println("task.getName() = " + task.getName());

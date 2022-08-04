@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9089
 
 spring:
   datasource:
@@ -8,5 +8,29 @@ spring:
     username: root
     password: 123456
 
-mybatis-plus:
+mybatis:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
+  config-location: classpath:mybatis/mybatis-cfg.xml
+
+# flowable 设置
+flowable:
+  # 自动创建表，生产环境关闭该配置
+  database-schema-update: false
+  # flowable 定时任务
+  #  async-executor-activate: off
+  # 随便配置，不会用到，只是为了让 flowable 启动
+  common:
+    app:
+      idm-url: a
+      idm-admin:
+        user: a
+        password: a
+  modeler:
+    app:
+      rest-enabled: true
+
+# flowable 日志设置
+logging:
+  level:
+    org.flowable.engine.impl.persistence.entity.*: info
+    org.flowable.task.service.impl.persistence.entity.*: info
