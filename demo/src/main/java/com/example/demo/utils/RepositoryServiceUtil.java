@@ -1,7 +1,10 @@
 package com.example.demo.utils;
 
+import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.Deployment;
+import org.flowable.ui.modeler.domain.Model;
+import org.flowable.ui.modeler.serviceapi.ModelService;
 
 public class RepositoryServiceUtil {
 
@@ -19,6 +22,19 @@ public class RepositoryServiceUtil {
                 .name(fileName)
                 .category(fileName)
                 .key(fileName + ".Key")
+                .deploy();
+
+        System.out.println(deploy.getId());
+        System.out.println(deploy.getName());
+    }
+
+    public static void deployByModel(String modelId, RepositoryService repositoryService, ModelService modelService) {
+
+        Model model = modelService.getModel(modelId);
+        BpmnModel bpmnModel = modelService.getBpmnModel(model);
+        Deployment deploy = repositoryService.createDeployment()
+                .name(model.getName())
+                .addBpmnModel(model.getKey() + ".bpmn", bpmnModel)
                 .deploy();
 
         System.out.println(deploy.getId());
