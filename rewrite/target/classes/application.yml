@@ -2,7 +2,7 @@ database:
   name: flowable-spring-boot
 
 server:
-  port: 9090
+  port: 19090
 
 spring:
   datasource:
@@ -20,7 +20,7 @@ flowable:
   # 自动创建表，生产环境关闭该配置
   database-schema-update: false
   # flowable 定时任务
-#  async-executor-activate: off
+  #  async-executor-activate: off
   # 随便配置，不会用到，只是为了让 flowable 启动
   common:
     app:

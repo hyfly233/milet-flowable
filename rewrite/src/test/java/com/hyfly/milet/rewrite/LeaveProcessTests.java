@@ -1,19 +1,24 @@
 package com.hyfly.milet.rewrite;
 
+import com.hyfly.milet.rewrite.business.service.LeaveProcessService;
 import com.hyfly.milet.rewrite.pojo.dto.LeaveProcess.DeptApprovalDto;
 import com.hyfly.milet.rewrite.pojo.dto.LeaveProcess.HrApprovalDto;
 import com.hyfly.milet.rewrite.pojo.dto.LeaveProcess.LeaveApplyParam;
-import com.hyfly.milet.rewrite.business.service.LeaveProcessService;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.repository.ProcessDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
+import java.util.*;
 
 @SpringBootTest
 class LeaveProcessTests {
     @Autowired
     private LeaveProcessService leaveProcessService;
+
+    @Autowired
+    private RepositoryService repositoryService;
 
     @Test
     void contextLoads() {
@@ -85,5 +90,20 @@ class LeaveProcessTests {
 
 
         leaveProcessService.claimTask(taskId, userId);
+    }
+
+    @Test
+    void processKvList() {
+        List<Map<String, String>> list = new ArrayList<>();
+
+        List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().latestVersion().list();
+        processDefinitions.forEach(p -> {
+            Map<String, String> map = new HashMap<>(2);
+            map.put("key", p.getKey());
+            map.put("name", p.getName());
+            list.add(map);
+        });
+
+        System.out.println(list);
     }
 }
