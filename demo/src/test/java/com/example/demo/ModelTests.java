@@ -20,6 +20,7 @@ public class ModelTests {
 
     @Test
     void contextLoads() {
+        System.out.println(System.currentTimeMillis());
     }
 
     @Test

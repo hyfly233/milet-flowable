@@ -1,6 +1,7 @@
 package com.hyfly.milet.rewrite.flowable.controller;
 
 
+import com.hyfly.milet.rewrite.flowable.service.CustomTaskService;
 import com.hyfly.milet.rewrite.pojo.vo.Result;
 import org.flowable.engine.FormService;
 import org.flowable.engine.HistoryService;
@@ -25,6 +26,9 @@ public class TaskController {
     private TaskService taskService;
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    private CustomTaskService customTaskService;
 
 //    @Autowired
 //    private SysBaseApiImpl sysBaseApiImpl;
@@ -171,4 +175,11 @@ public class TaskController {
 
 
     // todo 任务驳回
+
+
+    @PostMapping("/rejectTask")
+    public Result<?> rejectTask(String taskId) {
+        return Result.OK(customTaskService.rejectTask(taskId));
+    }
+
 }
